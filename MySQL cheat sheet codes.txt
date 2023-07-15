@@ -1,0 +1,112 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| test               |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> create database demo;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| demo               |
+| mydb               |
+| mysql              |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use demo;
+Database changed
+mysql> CREATE TABLE users(
+    -> id INT AUTO_INCREMENT,
+    ->    first_name VARCHAR(100),
+    ->    last_name VARCHAR(100),
+    ->    email VARCHAR(50)
+    -> );
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+mysql> drop table users;
+ERROR 1051 (42S02): Unknown table 'users'
+mysql>  create table sample(first_name VARCHAR(100),email VARCHAR(100));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_demo |
++----------------+
+| sample         |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> insert into sample(first_name,email)values('gayatri','gayatri@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sample(first_name,email)values('pandu','pandu@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sample(first_name,email)values('likhitha','likhitha@gmail.com');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select *from sample;
++------------+--------------------+
+| first_name | email              |
++------------+--------------------+
+| gayatri    | gayatri@gmail.com  |
+| pandu      | pandu@gmail.com    |
+| likhitha   | likhitha@gmail.com |
++------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE sample ADD age VARCHAR(3);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from sample;
++------------+--------------------+------+
+| first_name | email              | age  |
++------------+--------------------+------+
+| gayatri    | gayatri@gmail.com  | NULL |
+| pandu      | pandu@gmail.com    | NULL |
+| likhitha   | likhitha@gmail.com | NULL |
++------------+--------------------+------+
+3 rows in set (0.00 sec)
+
+mysql> update sample SET age = '20' WHERE first_name='gayatri';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from sample;
++------------+--------------------+------+
+| first_name | email              | age  |
++------------+--------------------+------+
+| gayatri    | gayatri@gmail.com  | 20   |
+| pandu      | pandu@gmail.com    | NULL |
+| likhitha   | likhitha@gmail.com | NULL |
++------------+--------------------+------+
+3 rows in set (0.00 sec)
+
+mysql> update sample SET age = '16' WHERE first_name='pandu';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sample SET age = '22' WHERE first_name='likhitha';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from sample;
++------------+--------------------+------+
+| first_name | email              | age  |
++------------+--------------------+------+
+| gayatri    | gayatri@gmail.com  | 20   |
+| pandu      | pandu@gmail.com    | 16   |
+| likhitha   | likhitha@gmail.com | 22   |
++------------+--------------------+------+
+3 rows in set (0.00 sec)
